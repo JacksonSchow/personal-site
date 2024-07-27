@@ -1,6 +1,8 @@
 import React from 'react';
+import moment from 'moment';
 import { BlogPost } from '../types';
 import { Link } from 'react-router-dom';
+import './BlogPostList.css';
 
 interface BlogPostListProps {
     blogPosts: BlogPost[];
@@ -8,18 +10,18 @@ interface BlogPostListProps {
 
 const BlogPostList: React.FC<BlogPostListProps> = ({ blogPosts }) => {
     return (
-        <div>
+        <div className='blog-post-list'>
             {blogPosts.map((post: BlogPost) => (
-                <div key={post.id}>
-                    <Link to={`/post/${post.title_url}`}>
-                        <div>
-                            <h3>{post.title}</h3>
-                            <p>{post.author}</p>
-                            <p>{post.created_at}</p>
-                            <p>{post.summary}</p>
+                <Link key={post.id} to={`/post/${post.title_url}`} className='blog-post-item'>
+                    {post.s3_image_url ? <img src={post.s3_image_url} alt='Decorative' /> : null}
+                    <div>
+                        <div className='title-row'>
+                            <p className='title'>{post.title}</p>
+                            <p className='blog-post-summary'>{moment(post.created_at).format('MMM D, yyyy')}</p>
                         </div>
-                    </Link>
-                </div>
+                        <p>{post.summary}</p>
+                    </div>
+                </Link>
             ))}
         </div>
     );

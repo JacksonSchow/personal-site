@@ -5,10 +5,12 @@ import Blog from './pages/Blog';
 const App: React.FC = () => {
     return (
         <Router>
-            <Routes>
-                <Route path="/blog" Component={Blog} />
-                <Route path="/" element={<Navigate replace to="/blog" />} />
-            </Routes>
+            <div className='container'>
+                <Routes>
+                    <Route path="/blog" Component={Blog} />
+                    <Route path="/" element={<Navigate replace to="/blog" />} />
+                </Routes>
+            </div>
         </Router>
     )
 }
